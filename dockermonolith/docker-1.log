@@ -1,0 +1,14 @@
+REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE
+barmank32/ubuntu-tmp-file   latest              8a969191260b        56 seconds ago      63.3MB
+barmank32/sys-ubuntu-py3    xenial              d6a5e1192982        6 days ago          169MB
+barmank32/sys-ubuntu-py3    latest              90dcd62a9fa2        6 days ago          168MB
+ubuntu                      xenial              8185511cd5ad        8 days ago          132MB
+ubuntu                      18.04               c090eaba6b94        8 days ago          63.3MB
+nginx                       latest              f6d0b4767a6c        2 weeks ago         133MB
+jrei/systemd-ubuntu         16.04               8c96fdd9a00b        8 weeks ago         131MB
+
+$ docker inspect <u_container_id>
+в выводе это команды находится информация о используемых ресурсах запущенного контейнера.
+
+$ docker inspect <u_image_id>
+в выводе это команды находится информация о содержимом образа и его слоях.
