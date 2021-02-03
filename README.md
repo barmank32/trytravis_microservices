@@ -76,12 +76,40 @@ CMD ["/start.sh"]
 - `docker tag reddit:latest <your-login>/otus-reddit:1.0` - присвоение тега
 - `docker push <your-login>/otus-reddit:1.0` - отправка образа на docker hub
 # ДЗ № 13
-
+[![Build Status](https://travis-ci.com/barmank32/trytravis_microservices.svg?branch=docker-3)](https://travis-ci.com/barmank32/trytravis_microservices)
+## Новая структура приложения
+Создадим три Dockerfile для новой структуры нашего приложения
+- для сервиса постов
+- для сервиса коментов
+- для веб-интерфейса
+Соберем наши приложения
+```
+$ docker build -t barmank32/post:1.0 ./post-py
+$ docker build -t barmank32/comment:1.0 ./comment
+$ docker build -t barmank32/ui:1.0 ./ui
+```
+Создадим сеть и запустим контейнеры
+```
+$ docker network create reddit
+$ docker run -d --network=reddit \--network-alias=post_db --network-alias=comment_db mongo:latest
+$ docker run -d --network=reddit --network-alias=post barmank32/post:1.0
+$ docker run -d --network=reddit --network-alias=comment barmank32/comment:1.0
+$ docker run -d --network=reddit -p 9292:9292 barmank32/ui:1.0
+```
 ## Задание*
+Остановим и запустим с другими алиасами наши приложения
 ```
 $ docker kill $(docker ps -q)
 $ docker run -d --network=reddit --network-alias=mongodb -v reddit_db:/data/db mongo:latest
 $ docker run -d --network=reddit --network-alias=app_post --env POST_DATABASE_HOST=mongodb barmank32/post:1.0
 $ docker run -d --network=reddit --network-alias=app_comment --env COMMENT_DATABASE_HOST=mongodb barmank32/comment:2.0
 $ docker run -d --network=reddit -p 9292:9292 --env POST_SERVICE_HOST=app_post --env COMMENT_SERVICE_HOST=app_comment barmank32/ui:3.0
+```
+Для сборки образа на Alpine я использовал следующие директивы, остальное осталось без изменения
+```
+FROM alpine:latest
+
+RUN apk update \
+    && apk add --no-cache ruby-full ruby-dev build-base \
+    && gem install bundler:1.17.2
 ```
