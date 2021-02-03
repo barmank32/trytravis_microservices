@@ -79,8 +79,9 @@ CMD ["/start.sh"]
 
 ## Задание*
 ```
- docker run -d --network=reddit --network-alias=mongodb mongo:latest
- docker run -d --network=reddit --network-alias=app_post --env POST_DATABASE_HOST=mongodb barmank32/post:1.0
- docker run -d --network=reddit --network-alias=app_comment --env COMMENT_DATABASE_HOST=mongodb barmank32/comment:1.0
- docker run -d --network=reddit -p 9292:9292 --env POST_SERVICE_HOST=app_post --env COMMENT_SERVICE_HOST=app_comment barmank32/ui:1.0
+$ docker kill $(docker ps -q)
+$ docker run -d --network=reddit --network-alias=mongodb -v reddit_db:/data/db mongo:latest
+$ docker run -d --network=reddit --network-alias=app_post --env POST_DATABASE_HOST=mongodb barmank32/post:1.0
+$ docker run -d --network=reddit --network-alias=app_comment --env COMMENT_DATABASE_HOST=mongodb barmank32/comment:2.0
+$ docker run -d --network=reddit -p 9292:9292 --env POST_SERVICE_HOST=app_post --env COMMENT_SERVICE_HOST=app_comment barmank32/ui:3.0
 ```
