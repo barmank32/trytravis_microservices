@@ -75,3 +75,9 @@ CMD ["/start.sh"]
 - `docker login` - аутентификация на docker hub
 - `docker tag reddit:latest <your-login>/otus-reddit:1.0` - присвоение тега
 - `docker push <your-login>/otus-reddit:1.0` - отправка образа на docker hub
+
+
+ docker run -d --network=reddit --network-alias=mongodb mongo:latest
+ docker run -d --network=reddit --network-alias=app_post --env POST_DATABASE_HOST=mongodb barmank32/post:1.0
+ docker run -d --network=reddit --network-alias=app_comment --env COMMENT_DATABASE_HOST=mongodb barmank32/comment:1.0
+ docker run -d --network=reddit -p 9292:9292 --env POST_SERVICE_HOST=app_post COMMENT_SERVICE_HOST=app_comment barmank32/ui:1.0
