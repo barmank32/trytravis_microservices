@@ -1,7 +1,12 @@
 dist: xenial
 language: bash
+env:
+  global:
+    secure: lDfqWMQVHM3TE1HAPAVwmPE2Oa3CDJfajPtjWu0dnKM3TV1MnmuOqJtADP07Cb8dy1kMmLUt7SIngHHaXB/gS/cXEEDnXJr5gUK7tS8IuyTB7f1vZ7NmHEHRC4gggfCisHR4M0ZuzOTctdZXrg7xEhaRqtxUSS5OyaaMkM+rtHvO8/ZZiG2re9w4mf4279JSHifmESXlGCgZFnkn6fkthdZfGigxUggtBQFzUIrcrX9iWol2jYuCG38rYAaLPBKoP+GyAvSJvKFikU+PA6F7NHaSmaq1flObD5wPf7rKBJsnpG1tSZ7+058jPgyn5WW/8XV9m9zRRJ0smBnHasyxchzPG7oiuOQTJY0MNuAc6BaOAEiYi4/Y3kFoWtmSFjF2xVRus1lyPAARp1ClmmVKREYNlcMPsf6TQwBOmxk29V5s6EWxQgVZiptwh7baQAFgXqz+dlHhdYIj47oPAPoVV8dq5ucoTDUmzcrqdE1AK8O03dnyyCKRwTQRk81M9ZO2RYLkIjljLpPgq3BFfj3lDl/kV3fAPECnfIL7QjLwQP2d9rEsJVS8m6FfXwGcCWwyaOpZFniyQNyFFt7JFRHz5WVIbvatsti6xnVpTewqsTsNJZDvOsdDceSE46lNQEjhBnBiIBqtHuHsR638BjApauUmGbRt8K6PE2L1mUk25qY=
 before_install:
-  - curl https://raw.githubusercontent.com/express42/otus-homeworks/2020-11/run.sh | bash
+- curl https://raw.githubusercontent.com/express42/otus-homeworks/2020-11/run.sh | bash
+after_script:
+- ".github/notification.sh"
 notifications:
   email: false
   slack:
