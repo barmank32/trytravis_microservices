@@ -113,3 +113,6 @@ RUN apk update \
     && apk add --no-cache ruby-full ruby-dev build-base \
     && gem install bundler:1.17.2
 ```
+# ДЗ № 14
+
+# container_name: mongo_db
